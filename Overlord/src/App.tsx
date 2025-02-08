@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Scissors, User, UserCircle } from 'lucide-react';
+import { Scissors, User, UserCircle, Check, Loader2 } from 'lucide-react';
 
 function App() {
   const [barber, setBarber] = useState('');
