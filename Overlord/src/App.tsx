@@ -5,7 +5,10 @@ function App() {
   const [barber, setBarber] = useState('');
   const [client, setClient] = useState('');
   const [haircut, setHaircut] = useState('');
-  const [saved, setSaved] = useState(false); // Estado para controle da tela de confirmação
+  const [isSaving, setIsSaving] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const barberOptions = ['Ryan', 'Vitor', 'Marcondes'];
 
   const haircutOptions = [
     'Corte Social',
