@@ -21,6 +21,7 @@ export default function ComandaForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Basic " + btoa("admin:barbacabelobigode")
         },
         body: JSON.stringify(payload),
       });
