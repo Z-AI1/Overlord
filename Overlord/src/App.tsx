@@ -34,14 +34,20 @@ function App() {}
       // Criando um objeto de formatação de data
       const options: Intl.DateTimeFormatOptions = { 
         timeZone: 'America/Sao_Paulo',
-        day: '2-digit' as '2-digit', 
-        month: '2-digit' as '2-digit', 
-        year: 'numeric' as 'numeric', 
-        hour: '2-digit' as '2-digit', 
-        minute: '2-digit' as '2-digit',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false, // Garante o formato 24h
       };
       
-      const dataFormatada = new Intl.DateTimeFormat('pt-BR', options).format(new Date());
+      // Criando a data com o fuso horário correto
+      const dataAtual = new Date().toLocaleString('pt-BR', options);
+      
+      console.log(dataAtual); // Verifique no console para testar
+      
       
     
       const response = await fetch(n8nWebhookUrl, {
@@ -53,7 +59,7 @@ function App() {}
           barbeiro: barber,
           cliente: client,
           corte: haircut,
-          data: dataFormatada, // Agora a data já está formatada corretamente
+          data: dataAtual, // Agora a data já está formatada corretamente
         }),
       });
     
