@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Scissors, User, UserCircle, Check, Loader2 } from 'lucide-react';
 
 function App() {
@@ -28,21 +28,41 @@ function App() {
     setShowSuccess(false);
     setError('');
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const n8nWebhookUrl = 'SUA_URL_DO_WEBHOOK_N8N_AQUI';
+      
+      const response = await fetch(n8nWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          barbeiro: barber,
+          cliente: client,
+          corte: haircut,
+          data: new Date().toISOString()
+        }),
+      });
 
-    setIsSaving(false);
-    setShowSuccess(true);
+      if (!response.ok) {
+        throw new Error('Falha ao enviar dados para o servidor');
+      }
 
-    // Reset fields after saving
-    setBarber('');
-    setClient('');
-    setHaircut('');
+      setShowSuccess(true);
+      setBarber('');
+      setClient('');
+      setHaircut('');
 
-    // Hide success message after 3 seconds
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 3000);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Ocorreu um erro desconhecido');
+      }
+    } finally {
+      setIsSaving(false);
+      setTimeout(() => setShowSuccess(false), 3000);
+    }
   };
 
   return (
@@ -112,7 +132,7 @@ function App() {
           </div>
 
           {error && (
-            <div className="text-red-500 text-sm text-center">
+            <div className="text-red-500 text-sm text-center animate-fade-in">
               {error}
             </div>
           )}
