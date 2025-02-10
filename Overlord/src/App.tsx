@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Scissors, User, UserCircle, Check, Loader2 } from 'lucide-react';
 
-function App() {
+function App() {}
   const [barber, setBarber] = useState('');
   const [client, setClient] = useState('');
   const [haircut, setHaircut] = useState('');
