@@ -7,9 +7,9 @@ function App() {
   const [haircut, setHaircut] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   const barberOptions = ['Ryan', 'Vitor', 'Marcondes'];
-
   const haircutOptions = [
     'Corte Social',
     'Corte Degrade',
@@ -19,15 +19,26 @@ function App() {
   ];
 
   const handleSave = async () => {
+    if (!barber || !client || !haircut) {
+      setError('Por favor, preencha todos os campos.');
+      return;
+    }
+
     setIsSaving(true);
     setShowSuccess(false);
-    
+    setError('');
+
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     setIsSaving(false);
     setShowSuccess(true);
-    
+
+    // Reset fields after saving
+    setBarber('');
+    setClient('');
+    setHaircut('');
+
     // Hide success message after 3 seconds
     setTimeout(() => {
       setShowSuccess(false);
@@ -100,12 +111,18 @@ function App() {
             </div>
           </div>
 
+          {error && (
+            <div className="text-red-500 text-sm text-center">
+              {error}
+            </div>
+          )}
+
           <div className="relative">
             <button
               onClick={handleSave}
-              disabled={isSaving}
+              disabled={isSaving || !barber || !client || !haircut}
               className={`w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 sm:py-3 rounded-lg transition-all mt-4 sm:mt-6 shadow-lg text-sm sm:text-base ${
-                isSaving ? 'opacity-80 cursor-not-allowed' : ''
+                isSaving || !barber || !client || !haircut ? 'opacity-80 cursor-not-allowed' : ''
               }`}
             >
               {isSaving ? (
