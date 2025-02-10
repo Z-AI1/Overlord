@@ -29,7 +29,7 @@ function App() {
     setError('');
 
     try {
-      const n8nWebhookUrl = 'SUA_URL_DO_WEBHOOK_N8N_AQUI';
+      const n8nWebhookUrl = 'https://dinastia-n8n-editor.v29lah.easypanel.host/webhook-test/comanda';
       
       const response = await fetch(n8nWebhookUrl, {
         method: 'POST',
