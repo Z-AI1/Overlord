@@ -17,6 +17,9 @@ export default function ComandaForm() {
     };
 
     try {
+
+      console.log("Enviando payload:", payload)
+      
       const response = await fetch("https://dinastia-n8n-editor.v29lah.easypanel.host/webhook-test/comanda", {
         method: "POST",
         headers: {
