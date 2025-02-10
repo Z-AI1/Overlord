@@ -31,6 +31,19 @@ function App() {
     try {
       const n8nWebhookUrl = 'https://dinastia-n8n-editor.v29lah.easypanel.host/webhook-test/comanda';
       
+      // Criando um objeto de formatação de data
+      const options: Intl.DateTimeFormatOptions = { 
+        timeZone: 'America/Sao_Paulo',
+        day: '2-digit' as '2-digit', 
+        month: '2-digit' as '2-digit', 
+        year: 'numeric' as 'numeric', 
+        hour: '2-digit' as '2-digit', 
+        minute: '2-digit' as '2-digit',
+      };
+      
+      const dataFormatada = new Intl.DateTimeFormat('pt-BR', options).format(new Date());
+      
+    
       const response = await fetch(n8nWebhookUrl, {
         method: 'POST',
         headers: {
@@ -40,19 +53,19 @@ function App() {
           barbeiro: barber,
           cliente: client,
           corte: haircut,
-          data: new Date().toISOString()
+          data: dataFormatada, // Agora a data já está formatada corretamente
         }),
       });
-
+    
       if (!response.ok) {
         throw new Error('Falha ao enviar dados para o servidor');
       }
-
+    
       setShowSuccess(true);
       setBarber('');
       setClient('');
       setHaircut('');
-
+    
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -63,7 +76,7 @@ function App() {
       setIsSaving(false);
       setTimeout(() => setShowSuccess(false), 3000);
     }
-  };
+    
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4 sm:p-6 md:p-8">
