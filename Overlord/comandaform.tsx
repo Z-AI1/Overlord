@@ -21,10 +21,12 @@ export default function ComandaForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Basic " + btoa("admin:barbacabelobigode")
+      
         },
         body: JSON.stringify(payload),
       });
+
+      console.log("Response status:", response.status); // Log do status da resposta
 
       if (!response.ok) throw new Error("Erro ao enviar comanda");
 
