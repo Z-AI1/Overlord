@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Scissors, User, UserCircle, Check, Loader2 } from 'lucide-react';
 
-function App() {}
+function App() {
   const [barber, setBarber] = useState('');
   const [client, setClient] = useState('');
   const [haircut, setHaircut] = useState('');
@@ -30,28 +30,24 @@ function App() {}
 
     try {
       const n8nWebhookUrl = 'https://dinastia-n8n-editor.v29lah.easypanel.host/webhook-test/comanda';
-      
+
       // Criando um objeto de formatação de data
-const options: Intl.DateTimeFormatOptions = { 
-  timeZone: 'America/Sao_Paulo',
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit',
-  hour12: false, // Garante o formato 24h
-};
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: 'America/Sao_Paulo',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false, // Garante o formato 24h
+      };
 
-// Criando a data com o fuso horário correto
-const dataAtual = new Date().toLocaleString('pt-BR', options);
-
-console.log(dataAtual); // Verifique no console para testar
+      // Criando a data com o fuso horário correto
+      const dataAtual = new Date().toLocaleString('pt-BR', options);
 
       console.log(dataAtual); // Verifique no console para testar
-      
-      
-    
+
       const response = await fetch(n8nWebhookUrl, {
         method: 'POST',
         headers: {
@@ -64,16 +60,15 @@ console.log(dataAtual); // Verifique no console para testar
           data: dataAtual, // Agora a data já está formatada corretamente
         }),
       });
-    
+
       if (!response.ok) {
         throw new Error('Falha ao enviar dados para o servidor');
       }
-    
+
       setShowSuccess(true);
       setBarber('');
       setClient('');
       setHaircut('');
-    
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -84,7 +79,7 @@ console.log(dataAtual); // Verifique no console para testar
       setIsSaving(false);
       setTimeout(() => setShowSuccess(false), 3000);
     }
-    
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4 sm:p-6 md:p-8">
@@ -92,7 +87,7 @@ console.log(dataAtual); // Verifique no console para testar
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-gray-800 border-b pb-4">
           Overlord
         </h1>
-        
+
         <div className="space-y-4 sm:space-y-6">
           <div className="relative">
             <label className="flex items-center text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
