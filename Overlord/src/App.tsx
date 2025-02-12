@@ -12,10 +12,17 @@ function App() {
   const barberOptions = ['Ryan', 'Vitor', 'Marcondes'];
   const haircutOptions = [
     'Corte Social',
-    'Corte Degrade',
-    'Cabelo e Barba',
+    'Corte Degradê',
+    'Cabelo & Barba',
     'Barba',
-    'Pigmentação'
+    'Pigmentação',
+    'Sombrancelha',
+    'Pézinho',
+    'Luzes',
+    'Platinado',
+    'Relaxamento',
+    'Pigmentação Cabelo',
+    'Pigmentação Barba'
   ];
 
   const handleSave = async () => {
